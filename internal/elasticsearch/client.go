@@ -50,7 +50,10 @@ func NewClient(cfg *config.Config) (*Client, error) {
 }
 
 func (c *Client) EnsureIndex(ctx context.Context) error {
-	res, err := c.client.Indices.Exists([]string{c.indexName})
+	res, err := c.client.Indices.Exists(
+		[]string{c.indexName},
+		c.client.Indices.Exists.WithContext(ctx),
+	)
 	if err != nil {
 		return fmt.Errorf("failed to check index existence: %w", err)
 	}
@@ -87,6 +90,7 @@ func (c *Client) EnsureIndex(ctx context.Context) error {
 
 	res, err = c.client.Indices.Create(
 		c.indexName,
+		c.client.Indices.Create.WithContext(ctx),
 		c.client.Indices.Create.WithBody(strings.NewReader(mapping)),
 	)
 	if err != nil {
