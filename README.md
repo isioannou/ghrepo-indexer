@@ -37,7 +37,7 @@ The indexer can be configured using a YAML config file, command-line flags, or e
 
 ### Configuration File (Recommended)
 
-Create a `config.yaml` file (see `config.yaml.example`):
+Create a `config.yaml`:
 
 ```yaml
 github_token: ghp_xxxxxxxxxxxx
